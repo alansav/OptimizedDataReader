@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("OptimizedDataReader")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("An optimized Data Reader which uses the ordinal index of a column for performance improvements while allowing the client code to still reference the column using the column name")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Alan Savage")]
 [assembly: AssemblyProduct("OptimizedDataReader")]
-[assembly: AssemblyCopyright("Copyright ©  2017")]
+[assembly: AssemblyCopyright("Copyright © Alan Savage 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
