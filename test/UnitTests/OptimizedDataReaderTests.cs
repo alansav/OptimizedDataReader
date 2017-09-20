@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Data;
 using Moq;
-using NUnit.Framework;
+using Xunit;
 
 namespace Savage.Data
 {
-    [TestFixture]
     public class OptimizedDataReaderTests
     {
-        [Test]
+        [Fact]
         public void Constructor_Should_Throw_ArgumentNullException_When_dataReader_Is_Null()
         {
             Assert.Throws<ArgumentNullException>(() => new OptimizedDataReader(null));
         }
 
-        [Test]
+        [Fact]
         public void Read_Should_Call_Read_On_DataReader()
         {
             var mockDataReader = new Mock<IDataReader>();
@@ -26,7 +25,7 @@ namespace Savage.Data
             mockDataReader.Verify(x => x.Read(), Times.Once);
         }
 
-        [Test]
+        [Fact]
         public void NextResult_Should_Call_NextResult_On_DataReader()
         {
             var mockDataReader = new Mock<IDataReader>();
@@ -38,7 +37,7 @@ namespace Savage.Data
             mockDataReader.Verify(x => x.NextResult(), Times.Once);
         }
 
-        [Test]
+        [Fact]
         public void GetBoolean_Should_Call_GetBoolean()
         {
             var mockDataReader = new Mock<IDataReader>();
@@ -48,7 +47,7 @@ namespace Savage.Data
             var sut = new OptimizedDataReader(mockDataReader.Object);
             var result = sut.GetBoolean("boolean");
 
-            Assert.That(true, Is.EqualTo(result));
+            Assert.True(result);
             mockDataReader.Verify(x => x.GetOrdinal("boolean"), Times.Once);
             mockDataReader.Verify(x => x.GetBoolean(8), Times.Once);
 
@@ -56,12 +55,12 @@ namespace Savage.Data
             mockDataReader.ResetCalls();
             var result2 = sut.GetBoolean("boolean");
 
-            Assert.That(true, Is.EqualTo(result2));
+            Assert.True(result2);
             mockDataReader.Verify(x => x.GetOrdinal("boolean"), Times.Never);
             mockDataReader.Verify(x => x.GetBoolean(8), Times.Once);
         }
 
-        [Test]
+        [Fact]
         public void GetNullableBoolean_Should_Return_Null_When_IsDbNull_Returns_True()
         {
             var mockDataReader = new Mock<IDataReader>();
@@ -72,13 +71,13 @@ namespace Savage.Data
             var sut = new OptimizedDataReader(mockDataReader.Object);
             var result = sut.GetNullableBoolean("boolean");
 
-            Assert.That(result, Is.Null);
+            Assert.Null(result);
             mockDataReader.Verify(x => x.GetOrdinal("boolean"), Times.Once);
             mockDataReader.Verify(x => x.IsDBNull(8), Times.Once);
             mockDataReader.Verify(x => x.GetBoolean(8), Times.Never);
         }
 
-        [Test]
+        [Fact]
         public void GetNullableBoolean_Should_Return_True_When_IsDbNull_Returns_False()
         {
             var mockDataReader = new Mock<IDataReader>();
@@ -89,13 +88,13 @@ namespace Savage.Data
             var sut = new OptimizedDataReader(mockDataReader.Object);
             var result = sut.GetNullableBoolean("boolean");
 
-            Assert.That(result, Is.True);
+            Assert.True(result);
             mockDataReader.Verify(x => x.GetOrdinal("boolean"), Times.Once);
             mockDataReader.Verify(x => x.IsDBNull(8), Times.Once);
             mockDataReader.Verify(x => x.GetBoolean(8), Times.Once);
         }
 
-        [Test]
+        [Fact]
         public void GetString_Should_Return_Value_Wehn_IsDbNull_Returns_False()
         {
             var fakeResult = "abcdef";
@@ -107,7 +106,7 @@ namespace Savage.Data
             var sut = new OptimizedDataReader(mockDataReader.Object);
             var result = sut.GetString("string");
 
-            Assert.That(fakeResult, Is.EqualTo(result));
+            Assert.Equal(fakeResult, result);
             mockDataReader.Verify(x => x.GetOrdinal("string"), Times.Once);
             mockDataReader.Verify(x => x.GetString(9), Times.Once);
 
@@ -115,12 +114,12 @@ namespace Savage.Data
             mockDataReader.ResetCalls();
             var result2 = sut.GetString("string");
 
-            Assert.That(fakeResult, Is.EqualTo(result2));
+            Assert.Equal(fakeResult, result2);
             mockDataReader.Verify(x => x.GetOrdinal("string"), Times.Never);
             mockDataReader.Verify(x => x.GetString(9), Times.Once);
         }
 
-        [Test]
+        [Fact]
         public void GetString_Should_Return_Null_Wehn_IsDbNull_Returns_True()
         {
             var mockDataReader = new Mock<IDataReader>();
@@ -131,13 +130,13 @@ namespace Savage.Data
             var sut = new OptimizedDataReader(mockDataReader.Object);
             var result = sut.GetString("string");
 
-            Assert.That(result, Is.Null);
+            Assert.Null(result);
             mockDataReader.Verify(x => x.GetOrdinal("string"), Times.Once);
             mockDataReader.Verify(x => x.IsDBNull(9), Times.Once);
             mockDataReader.Verify(x => x.GetString(9), Times.Never);
         }
 
-        [Test]
+        [Fact]
         public void GetDateTime_Should_Call_GetDateTime()
         {
             var fakeDateTimeResult = new DateTime(2016, 9, 12, 22, 0, 0);
@@ -148,7 +147,7 @@ namespace Savage.Data
             var sut = new OptimizedDataReader(mockDataReader.Object);
             var result = sut.GetDateTime("datetime");
 
-            Assert.That(fakeDateTimeResult, Is.EqualTo(result));
+            Assert.Equal(fakeDateTimeResult, result);
             mockDataReader.Verify(x => x.GetOrdinal("datetime"), Times.Once);
             mockDataReader.Verify(x => x.GetDateTime(10), Times.Once);
 
@@ -156,12 +155,12 @@ namespace Savage.Data
             mockDataReader.ResetCalls();
             var result2 = sut.GetDateTime("datetime");
 
-            Assert.That(fakeDateTimeResult, Is.EqualTo(result2));
+            Assert.Equal(fakeDateTimeResult, result2);
             mockDataReader.Verify(x => x.GetOrdinal("datetime"), Times.Never);
             mockDataReader.Verify(x => x.GetDateTime(10), Times.Once);
         }
 
-        [Test]
+        [Fact]
         public void GetNullableDateTime_Should_Return_Value_When_IsDbNull_Returns_False()
         {
             var fakeDateTimeResult = new DateTime(2016, 9, 12, 22, 0, 0);
@@ -173,13 +172,13 @@ namespace Savage.Data
             var sut = new OptimizedDataReader(mockDataReader.Object);
             var result = sut.GetNullableDateTime("datetime");
 
-            Assert.That(fakeDateTimeResult, Is.EqualTo(result));
+            Assert.Equal(fakeDateTimeResult, result);
             mockDataReader.Verify(x => x.GetOrdinal("datetime"), Times.Once);
             mockDataReader.Verify(x => x.IsDBNull(11), Times.Once);
             mockDataReader.Verify(x => x.GetDateTime(11), Times.Once);
         }
 
-        [Test]
+        [Fact]
         public void GetNullableDateTime_Should_Return_Null_When_IsDbNull_Returns_True()
         {
             var mockDataReader = new Mock<IDataReader>();
@@ -190,13 +189,13 @@ namespace Savage.Data
             var sut = new OptimizedDataReader(mockDataReader.Object);
             var result = sut.GetNullableDateTime("datetime");
 
-            Assert.That(result, Is.Null);
+            Assert.Null(result);
             mockDataReader.Verify(x => x.GetOrdinal("datetime"), Times.Once);
             mockDataReader.Verify(x => x.IsDBNull(11), Times.Once);
             mockDataReader.Verify(x => x.GetDateTime(11), Times.Never);
         }
 
-        [Test]
+        [Fact]
         public void GetInt32_Should_Call_GetInt32()
         {
             const int fakeResult = int.MaxValue;
@@ -207,7 +206,7 @@ namespace Savage.Data
             var sut = new OptimizedDataReader(mockDataReader.Object);
             var result = sut.GetInt32("int32");
 
-            Assert.That(fakeResult, Is.EqualTo(result));
+            Assert.Equal(fakeResult, result);
             mockDataReader.Verify(x => x.GetOrdinal("int32"), Times.Once);
             mockDataReader.Verify(x => x.GetInt32(12), Times.Once);
 
@@ -215,12 +214,12 @@ namespace Savage.Data
             mockDataReader.ResetCalls();
             var result2 = sut.GetInt32("int32");
 
-            Assert.That(fakeResult, Is.EqualTo(result2));
+            Assert.Equal(fakeResult, result2);
             mockDataReader.Verify(x => x.GetOrdinal("int32"), Times.Never);
             mockDataReader.Verify(x => x.GetInt32(12), Times.Once);
         }
 
-        [Test]
+        [Fact]
         public void GetNullableInt32_Should_Return_Value_When_IsDbNull_Returns_False()
         {
             const int fakeResult = int.MaxValue;
@@ -232,13 +231,13 @@ namespace Savage.Data
             var sut = new OptimizedDataReader(mockDataReader.Object);
             var result = sut.GetNullableInt32("int32");
 
-            Assert.That(fakeResult, Is.EqualTo(result));
+            Assert.Equal(fakeResult, result);
             mockDataReader.Verify(x => x.GetOrdinal("int32"), Times.Once);
             mockDataReader.Verify(x => x.IsDBNull(12), Times.Once);
             mockDataReader.Verify(x => x.GetInt32(12), Times.Once);
         }
 
-        [Test]
+        [Fact]
         public void GetNullableInt32_Should_Return_Null_When_IsDbNull_Returns_True()
         {
             var mockDataReader = new Mock<IDataReader>();
@@ -249,13 +248,13 @@ namespace Savage.Data
             var sut = new OptimizedDataReader(mockDataReader.Object);
             var result = sut.GetNullableInt32("int32");
 
-            Assert.That(result, Is.Null);
+            Assert.Null(result);
             mockDataReader.Verify(x => x.GetOrdinal("int32"), Times.Once);
             mockDataReader.Verify(x => x.IsDBNull(12), Times.Once);
             mockDataReader.Verify(x => x.GetInt32(12), Times.Never);
         }
 
-        [Test]
+        [Fact]
         public void GetInt64_Should_Call_GetInt64()
         {
             const long fakeResult = long.MaxValue;
@@ -266,7 +265,7 @@ namespace Savage.Data
             var sut = new OptimizedDataReader(mockDataReader.Object);
             var result = sut.GetInt64("int64");
 
-            Assert.That(fakeResult, Is.EqualTo(result));
+            Assert.Equal(fakeResult, result);
             mockDataReader.Verify(x => x.GetOrdinal("int64"), Times.Once);
             mockDataReader.Verify(x => x.GetInt64(13), Times.Once);
 
@@ -274,12 +273,12 @@ namespace Savage.Data
             mockDataReader.ResetCalls();
             var result2 = sut.GetInt64("int64");
 
-            Assert.That(fakeResult, Is.EqualTo(result2));
+            Assert.Equal(fakeResult, result2);
             mockDataReader.Verify(x => x.GetOrdinal("int64"), Times.Never);
             mockDataReader.Verify(x => x.GetInt64(13), Times.Once);
         }
 
-        [Test]
+        [Fact]
         public void GetNullableInt64_Should_Return_Value_When_IsDbNull_Returns_False()
         {
             const long fakeResult = long.MaxValue;
@@ -291,13 +290,13 @@ namespace Savage.Data
             var sut = new OptimizedDataReader(mockDataReader.Object);
             var result = sut.GetNullableInt64("int64");
 
-            Assert.That(fakeResult, Is.EqualTo(result));
+            Assert.Equal(fakeResult, result);
             mockDataReader.Verify(x => x.GetOrdinal("int64"), Times.Once);
             mockDataReader.Verify(x => x.IsDBNull(13), Times.Once);
             mockDataReader.Verify(x => x.GetInt64(13), Times.Once);
         }
 
-        [Test]
+        [Fact]
         public void GetNullableInt64_Should_Return_Null_When_IsDbNull_Returns_True()
         {
             var mockDataReader = new Mock<IDataReader>();
@@ -308,13 +307,13 @@ namespace Savage.Data
             var sut = new OptimizedDataReader(mockDataReader.Object);
             var result = sut.GetNullableInt64("int64");
 
-            Assert.That(result, Is.Null);
+            Assert.Null(result);
             mockDataReader.Verify(x => x.GetOrdinal("int64"), Times.Once);
             mockDataReader.Verify(x => x.IsDBNull(13), Times.Once);
             mockDataReader.Verify(x => x.GetInt32(13), Times.Never);
         }
 
-        [Test]
+        [Fact]
         public void GetGuid_Should_Call_GetGuid()
         {
             var fakeResult = new Guid("E7DA6396-1C6F-4130-A725-C50EBD2C7CB9");
@@ -325,7 +324,7 @@ namespace Savage.Data
             var sut = new OptimizedDataReader(mockDataReader.Object);
             var result = sut.GetGuid("guid");
 
-            Assert.That(fakeResult, Is.EqualTo(result));
+            Assert.Equal(fakeResult, result);
             mockDataReader.Verify(x => x.GetOrdinal("guid"), Times.Once);
             mockDataReader.Verify(x => x.GetGuid(14), Times.Once);
 
@@ -333,12 +332,12 @@ namespace Savage.Data
             mockDataReader.ResetCalls();
             var result2 = sut.GetGuid("guid");
 
-            Assert.That(fakeResult, Is.EqualTo(result2));
+            Assert.Equal(fakeResult, result2);
             mockDataReader.Verify(x => x.GetOrdinal("guid"), Times.Never);
             mockDataReader.Verify(x => x.GetGuid(14), Times.Once);
         }
 
-        [Test]
+        [Fact]
         public void GetNullableGuid_Should_Return_Value_When_IsDbNull_Returns_False()
         {
             var fakeResult = new Guid("E7DA6396-1C6F-4130-A725-C50EBD2C7CB9");
@@ -350,13 +349,13 @@ namespace Savage.Data
             var sut = new OptimizedDataReader(mockDataReader.Object);
             var result = sut.GetNullableGuid("guid");
 
-            Assert.That(fakeResult, Is.EqualTo(result));
+            Assert.Equal(fakeResult, result);
             mockDataReader.Verify(x => x.GetOrdinal("guid"), Times.Once);
             mockDataReader.Verify(x => x.IsDBNull(14), Times.Once);
             mockDataReader.Verify(x => x.GetGuid(14), Times.Once);
         }
 
-        [Test]
+        [Fact]
         public void GetNullableGuid_Should_Return_Null_When_IsDbNull_Returns_True()
         {
             var mockDataReader = new Mock<IDataReader>();
@@ -367,13 +366,13 @@ namespace Savage.Data
             var sut = new OptimizedDataReader(mockDataReader.Object);
             var result = sut.GetNullableGuid("guid");
 
-            Assert.That(result, Is.Null);
+            Assert.Null(result);
             mockDataReader.Verify(x => x.GetOrdinal("guid"), Times.Once);
             mockDataReader.Verify(x => x.IsDBNull(14), Times.Once);
             mockDataReader.Verify(x => x.GetGuid(14), Times.Never);
         }
 
-        [Test]
+        [Fact]
         public void GetBytes_Should_Return_Value_Wehn_IsDbNull_Returns_False()
         {
             byte[] fakeResult = new byte[1];
@@ -385,7 +384,7 @@ namespace Savage.Data
             var sut = new OptimizedDataReader(mockDataReader.Object);
             var result = sut.GetBytes("bytes");
 
-            Assert.That(fakeResult, Is.EqualTo(result));
+            Assert.Equal(fakeResult, result);
             mockDataReader.Verify(x => x.GetOrdinal("bytes"), Times.Once);
             mockDataReader.Verify(x => x.GetValue(15), Times.Once);
 
@@ -393,12 +392,12 @@ namespace Savage.Data
             mockDataReader.ResetCalls();
             var result2 = sut.GetBytes("bytes");
 
-            Assert.That(fakeResult, Is.EqualTo(result2));
+            Assert.Equal(fakeResult, result2);
             mockDataReader.Verify(x => x.GetOrdinal("bytes"), Times.Never);
             mockDataReader.Verify(x => x.GetValue(15), Times.Once);
         }
 
-        [Test]
+        [Fact]
         public void GetBytes_Should_Return_Null_Wehn_IsDbNull_Returns_True()
         {
             var mockDataReader = new Mock<IDataReader>();
@@ -409,7 +408,7 @@ namespace Savage.Data
             var sut = new OptimizedDataReader(mockDataReader.Object);
             var result = sut.GetBytes("bytes");
 
-            Assert.That(result, Is.Null);
+            Assert.Null(result);
             mockDataReader.Verify(x => x.GetOrdinal("bytes"), Times.Once);
             mockDataReader.Verify(x => x.IsDBNull(15), Times.Once);
             mockDataReader.Verify(x => x.GetString(15), Times.Never);

@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <VersionPrefix>1.1.0</VersionPrefix>
+    <TargetFrameworks>netstandard2.0;net45;net46;</TargetFrameworks>
+    <Title>Optimized Data Reader</Title>
+    <Authors>Alan Savage</Authors>
+    <Description>Optimized data reader which contains performance improvements when dealing with datasets which contain a large number of rows.</Description>
+    <Copyright>© 2017 Alan Savage</Copyright>
+    <PackageProjectUrl>https://github.com/alansav/OptimizedDataReader</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/alansav/OptimizedDataReader</RepositoryUrl>
+    <PackageTags>Optimized DataReader;</PackageTags>
+  </PropertyGroup>
+
+</Project>
