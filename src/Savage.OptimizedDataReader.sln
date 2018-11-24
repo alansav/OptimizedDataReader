@@ -3,15 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.15
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D612CC4C-2501-452B-B344-6471B95C9F3A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Savage.OptimizedDataReader", "Savage.OptimizedDataReader\Savage.OptimizedDataReader.csproj", "{8A8F8D84-72C8-4D69-832F-463D892DAE2C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{29F473F6-19AD-4DAB-821D-6C0C9832243A}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{C541D1EF-6778-4039-BBB0-045C9BC4E67E}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OptimizedDataReader", "src\OptimizedDataReader\OptimizedDataReader.csproj", "{8A8F8D84-72C8-4D69-832F-463D892DAE2C}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "test\UnitTests\UnitTests.csproj", "{8EDF4429-251A-416D-BB68-93F227191BCF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Savage.OptimizedDataReader.UnitTests", "Savage.OptimizedDataReader.UnitTests\Savage.OptimizedDataReader.UnitTests.csproj", "{8EDF4429-251A-416D-BB68-93F227191BCF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,10 +24,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{8A8F8D84-72C8-4D69-832F-463D892DAE2C} = {D612CC4C-2501-452B-B344-6471B95C9F3A}
-		{8EDF4429-251A-416D-BB68-93F227191BCF} = {C541D1EF-6778-4039-BBB0-045C9BC4E67E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {670578E0-AC2D-423D-9625-41D47D25D449}

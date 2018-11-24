@@ -52,7 +52,7 @@ namespace Savage.Data
             mockDataReader.Verify(x => x.GetBoolean(8), Times.Once);
 
             //Query the same row shouldn't call GetOrdinal
-            mockDataReader.ResetCalls();
+            mockDataReader.Invocations.Clear();
             var result2 = sut.GetBoolean("boolean");
 
             Assert.True(result2);
@@ -111,7 +111,7 @@ namespace Savage.Data
             mockDataReader.Verify(x => x.GetString(9), Times.Once);
 
             //Query the same row shouldn't call GetOrdinal
-            mockDataReader.ResetCalls();
+            mockDataReader.Invocations.Clear();
             var result2 = sut.GetString("string");
 
             Assert.Equal(fakeResult, result2);
@@ -152,7 +152,7 @@ namespace Savage.Data
             mockDataReader.Verify(x => x.GetDateTime(10), Times.Once);
 
             //Query the same row shouldn't call GetOrdinal
-            mockDataReader.ResetCalls();
+            mockDataReader.Invocations.Clear();
             var result2 = sut.GetDateTime("datetime");
 
             Assert.Equal(fakeDateTimeResult, result2);
@@ -211,7 +211,7 @@ namespace Savage.Data
             mockDataReader.Verify(x => x.GetInt32(12), Times.Once);
 
             //Query the same row shouldn't call GetOrdinal
-            mockDataReader.ResetCalls();
+            mockDataReader.Invocations.Clear();
             var result2 = sut.GetInt32("int32");
 
             Assert.Equal(fakeResult, result2);
@@ -270,7 +270,7 @@ namespace Savage.Data
             mockDataReader.Verify(x => x.GetInt64(13), Times.Once);
 
             //Query the same row shouldn't call GetOrdinal
-            mockDataReader.ResetCalls();
+            mockDataReader.Invocations.Clear();
             var result2 = sut.GetInt64("int64");
 
             Assert.Equal(fakeResult, result2);
@@ -329,7 +329,7 @@ namespace Savage.Data
             mockDataReader.Verify(x => x.GetGuid(14), Times.Once);
 
             //Query the same row shouldn't call GetOrdinal
-            mockDataReader.ResetCalls();
+            mockDataReader.Invocations.Clear();
             var result2 = sut.GetGuid("guid");
 
             Assert.Equal(fakeResult, result2);
@@ -389,7 +389,7 @@ namespace Savage.Data
             mockDataReader.Verify(x => x.GetValue(15), Times.Once);
 
             //Query the same row shouldn't call GetOrdinal
-            mockDataReader.ResetCalls();
+            mockDataReader.Invocations.Clear();
             var result2 = sut.GetBytes("bytes");
 
             Assert.Equal(fakeResult, result2);
