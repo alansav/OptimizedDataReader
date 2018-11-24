@@ -6,8 +6,8 @@
     <Authors>Alan Savage</Authors>
     <Description>Optimized data reader which contains performance improvements when dealing with datasets which contain a large number of rows.</Description>
     <Copyright>© 2017 Alan Savage</Copyright>
-    <PackageProjectUrl>https://github.com/alansav/OptimizedDataReader</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/alansav/OptimizedDataReader</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/alansav/optimized_data_reader</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/alansav/optimized_data_reader</RepositoryUrl>
     <PackageTags>Optimized DataReader;</PackageTags>
     <PackageId>OptimizedDataReader</PackageId>
     <Product>Savage.OptimizedDataReader</Product>
